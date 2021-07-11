@@ -5,10 +5,9 @@
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">Categories</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white" style="text-decoration: none">Food</a></li>
-                        <li><a href="#" class="text-white" style="text-decoration: none">Drinks</a></li>
-                        <li><a href="#" class="text-white" style="text-decoration: none">Others</a></li>
-                        <li><a href="#" class="text-white" style="text-decoration: none">Baby Toys</a></li>
+                        @foreach($categories as $category)
+                            <li><a href="{{ $category->slug }}" class="text-white" style="text-decoration: none">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
