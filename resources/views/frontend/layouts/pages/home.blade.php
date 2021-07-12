@@ -30,11 +30,17 @@
                                     <form action="{{ route('cart.store') }}" method="post">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary mx-2">Add to cart</button>
                                     </form>
 
                                 </div>
-                                <strong class="text-muted">Price ${{ $product->price }}</strong>
+                                <strong class="text-muted">
+                                    @if($product->sale_price !== null && $product->sale_price > 0)
+                                        Price <strike>${{ $product->price }}</strike> ${{ $product->sale_price }}
+                                    @else
+                                        Price ${{ $product->price }}
+                                    @endif
+                                </strong>
                             </div>
                         </div>
                     </div>
