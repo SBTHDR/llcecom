@@ -26,7 +26,13 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="{{ route('product.show', $product->slug) }}" class="btn btn-sm btn-outline-secondary">View</a>
-                                    <a href="{{ route('product.show', $product->slug) }}" class="btn btn-sm btn-outline-secondary">Add to cart</a>
+
+                                    <form action="{{ route('cart.store') }}" method="post">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                                    </form>
+
                                 </div>
                                 <strong class="text-muted">Price ${{ $product->price }}</strong>
                             </div>
