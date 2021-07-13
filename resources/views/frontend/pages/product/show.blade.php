@@ -23,8 +23,13 @@
                     <p>{{ $product->description }}</p>
                     <hr>
                     <p><strong>Price ${{ $product->price }}</strong></p>
-                    <button class="btn btn-outline-secondary" type="button">Add to cart</button>
-                    <a href="{{ route('frontend.home') }}" class="btn btn-outline-secondary" type="button">Back to shop</a>
+                    <form action="{{ route('cart.store') }}" method="post">
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-secondary mx-2">Add to cart</button>
+
+                        <a href="{{ route('frontend.home') }}" class="btn btn-outline-secondary" type="button">Back to shop</a>
+                    </form>
                 </div>
             </div>
         </div>

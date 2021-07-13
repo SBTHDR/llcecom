@@ -13,6 +13,7 @@ class CartController extends Controller
     {
         $data = [];
         $data['cart'] = session()->has('cart') ? session()->get('cart') : [];
+        $data['total'] = array_sum(array_column($data['cart'], 'price'));
 
         return view('frontend.pages.cart.show', $data);
     }
@@ -50,5 +51,25 @@ class CartController extends Controller
 
         return redirect()->route('cart.show');
 
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'product_id' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back();
+        }
+
+        $cart = session()->has('cart') ? session()->get('cart') : [];
+
+        unset($cart[$request->input('product_id')]);
+        session(['cart' => $cart]);
+
+        session()->flash('message', 'One Product remove from the cart');
+
+        return redirect()->back();
     }
 }

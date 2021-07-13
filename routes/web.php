@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
     Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/remove', [CartController::class, 'destroy'])->name('cart.remove');
 });
 
 
