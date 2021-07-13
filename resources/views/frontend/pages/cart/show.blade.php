@@ -28,6 +28,7 @@
                 <tr>
                     <th>Serial</th>
                     <th>Product</th>
+                    <th>Unit Price</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Action</th>
@@ -39,8 +40,9 @@
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $product['title'] }}</td>
+                        <td>{{ $product['unit_price'] }}</td>
                         <td><input type="number" name="quantity" value="{{ $product['quantity'] }}"></td>
-                        <td>{{ $product['price'] }}</td>
+                        <td>{{ $product['total_price'] }}</td>
                         <td>
                             <form action="{{ route('cart.remove') }}" method="post">
                                 <input type="hidden" name="product_id" value="{{ $key }}">
@@ -53,12 +55,17 @@
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>Total</td>
                     <td>{{ number_format($total, 2) }}</td>
                     <td></td>
                 </tr>
                 </tbody>
             </table>
+        @endif
+
+        @if(!empty($cart))
+            <a href="{{ route('cart.clear') }}" class="btn btn-outline-danger">Clear all items from Cart</a>
         @endif
 
     </div>
